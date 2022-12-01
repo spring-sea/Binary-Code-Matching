@@ -1,0 +1,68 @@
+push    r14
+push    r13
+mov     r13, rdi
+push    r12
+push    rbp
+push    rbx
+mov     rbx, rsi
+sub     rsp, 10h
+mov     rbp, [rsi+18h]
+mov     rax, fs:28h
+mov     [rsp+38h+var_30], rax
+xor     eax, eax
+movzx   eax, byte ptr [rsi+29h]
+and     eax, 3
+jz      short loc_48B0
+cmp     al, 1
+jz      loc_48D8
+xor     ecx, ecx
+xor     edx, edx
+xor     esi, esi
+xor     edi, edi
+call    rbp
+lea     rsi, [rbx+40h]
+xor     ecx, ecx
+mov     edi, 3
+mov     r12, rax
+mov     rdx, rax
+call    rbp
+mov     rsi, [rbx+18h]
+mov     rdi, rsp
+call    __ZN4absl12lts_2021032414flags_internal15DynValueDeleterC2EPFPvNS1_6FlagOpEPKvS3_S3_E; absl::lts_20210324::flags_internal::DynValueDeleter::DynValueDeleter(void * (*)(absl::lts_20210324::flags_internal::FlagOp,void const*,void *,void *))
+mov     rax, [rsp+38h+var_38]
+mov     [r13+8], r12
+mov     [r13+0], rax
+mov     rax, [rsp+38h+var_30]
+sub     rax, fs:28h
+jnz     short loc_48ED
+add     rsp, 10h
+mov     rax, r13
+pop     rbx
+pop     rbp
+pop     r12
+pop     r13
+pop     r14
+retn
+mov     r14, [rsi+40h]
+xor     ecx, ecx
+xor     edx, edx
+xor     esi, esi
+xor     edi, edi
+call    rbp
+xor     ecx, ecx
+mov     rsi, r14
+mov     edi, 3
+mov     r12, rax
+mov     rdx, rax
+call    rbp
+jmp     short loc_4874
+xor     edi, edi
+xor     ecx, ecx
+xor     edx, edx
+xor     esi, esi
+call    rbp
+mov     r12, rax
+mov     rdi, rax
+call    qword ptr [rbx+40h]
+jmp     short loc_4874
+call    ___stack_chk_fail

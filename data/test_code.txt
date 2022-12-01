@@ -1,0 +1,66 @@
+push    r13
+push    r12
+mov     r12, rsi
+push    rbp
+push    rbx
+mov     rbx, rdi
+sub     rsp, 18h
+mov     rax, fs:28h
+mov     [rsp+var_s8], rax
+xor     eax, eax
+mov     rbp, rsp
+call    __ZNK4absl12lts_2021032414flags_internal8FlagImpl9DataGuardEv; absl::lts_20210324::flags_internal::FlagImpl::DataGuard(void)
+mov     rdi, rax; this
+mov     [rsp+var_s0], rax
+call    __ZN4absl12lts_202103245Mutex4LockEv; absl::lts_20210324::Mutex::Lock(void)
+mov     rdi, rbx; this
+mov     r13, [r12+20h]
+call    __ZNK4absl12lts_2021032414flags_internal8FlagImpl17ModificationCountEv; absl::lts_20210324::flags_internal::FlagImpl::ModificationCount(void)
+cmp     r13, rax
+jz      short loc_4F7E
+mov     al, [rbx+28h]
+shr     al, 1
+and     eax, 3
+cmp     al, 1
+jz      short loc_4F43
+test    al, 1
+jnz     short loc_4F50
+mov     rsi, [r12+10h]
+jmp     short loc_4F48
+lea     rsi, [r12+10h]; void *
+mov     rdi, rbx; this
+call    __ZN4absl12lts_2021032414flags_internal8FlagImpl10StoreValueEPKv; absl::lts_20210324::flags_internal::FlagImpl::StoreValue(void const*)
+mov     dl, [r12+18h]
+mov     al, [rbx+29h]
+and     edx, 1
+and     eax, 0FFFFFFFBh
+shl     edx, 2
+or      eax, edx
+mov     [rbx+29h], al
+mov     dl, [r12+19h]
+and     eax, 0FFFFFFF7h
+mov     r12b, 1
+and     edx, 1
+shl     edx, 3
+or      eax, edx
+mov     [rbx+29h], al
+jmp     short loc_4F81
+xor     r12d, r12d
+mov     rdi, rbp; this
+call    __ZN4absl12lts_202103249MutexLockD2Ev; absl::lts_20210324::MutexLock::~MutexLock()
+mov     rax, [rsp+var_s8]
+sub     rax, fs:28h
+jz      short loc_4FB1
+call    ___stack_chk_fail
+mov     r12, rax
+mov     rdi, rbp; this
+call    __ZN4absl12lts_202103249MutexLockD2Ev; absl::lts_20210324::MutexLock::~MutexLock()
+mov     rdi, r12; struct _Unwind_Exception *
+call    __Unwind_Resume
+add     rsp, 18h
+mov     eax, r12d
+pop     rbx
+pop     rbp
+pop     r12
+pop     r13
+retn

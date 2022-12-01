@@ -1,0 +1,62 @@
+push    r13
+push    r12
+mov     r12, rsi
+push    rbp
+push    rbx
+mov     rbx, rdi
+sub     rsp, 8
+call    __ZNK4absl12lts_2021032414flags_internal8FlagImpl9DataGuardEv; absl::lts_20210324::flags_internal::FlagImpl::DataGuard(void)
+mov     rdi, rax; this
+mov     rbp, rax
+call    __ZN4absl12lts_202103245Mutex4LockEv; absl::lts_20210324::Mutex::Lock(void)
+mov     rdi, rbx; this
+mov     r13, [r12+20h]
+call    __ZNK4absl12lts_2021032414flags_internal8FlagImpl17ModificationCountEv; absl::lts_20210324::flags_internal::FlagImpl::ModificationCount(void)
+cmp     r13, rax
+jz      short loc_5260
+movzx   eax, byte ptr [rbx+28h]
+shr     al, 1
+and     eax, 3
+cmp     al, 1
+jz      short loc_5240
+test    al, 1
+jz      short loc_5250
+movzx   edx, byte ptr [r12+18h]
+movzx   eax, byte ptr [rbx+29h]
+and     edx, 1
+and     eax, 0FFFFFFFBh
+shl     edx, 2
+or      eax, edx
+mov     [rbx+29h], al
+movzx   edx, byte ptr [r12+19h]
+and     eax, 0FFFFFFF7h
+mov     r12d, 1
+and     edx, 1
+shl     edx, 3
+or      eax, edx
+mov     [rbx+29h], al
+mov     rdi, rbp; this
+call    __ZN4absl12lts_202103245Mutex6UnlockEv; absl::lts_20210324::Mutex::Unlock(void)
+add     rsp, 8
+mov     eax, r12d
+pop     rbx
+pop     rbp
+pop     r12
+pop     r13
+retn
+lea     rsi, [r12+10h]; src
+mov     rdi, rbx; this
+call    __ZN4absl12lts_2021032414flags_internal8FlagImpl10StoreValueEPKv; absl::lts_20210324::flags_internal::FlagImpl::StoreValue(void const*)
+jmp     short loc_51F3
+mov     rsi, [r12+10h]; src
+mov     rdi, rbx; this
+call    __ZN4absl12lts_2021032414flags_internal8FlagImpl10StoreValueEPKv; absl::lts_20210324::flags_internal::FlagImpl::StoreValue(void const*)
+jmp     short loc_51F3
+xor     r12d, r12d
+jmp     short loc_5225
+mov     r12, rax
+jmp     loc_4334
+mov     rdi, rbp; this
+call    __ZN4absl12lts_202103245Mutex6UnlockEv; absl::lts_20210324::Mutex::Unlock(void)
+mov     rdi, r12; struct _Unwind_Exception *
+call    __Unwind_Resume
